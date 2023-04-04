@@ -8,10 +8,26 @@
 	<img
 		src={video.thumb}
 		alt={video.title}
-		class={`${mw} ${mh} rounded-xl transition-all hover:rounded-none`}
+		class={`${mw} ${mh} rounded-xl transition-all duration-300 hover:rounded-none`}
 	/>
-	<p class="w-${mw}">{video.title}</p>
-	<p>{video.views} - {video.uploaded}</p>
+	<div class="mt-3 flex gap-4">
+		<a
+			class="flex h-12 w-12 items-center justify-center rounded-full"
+			href={`channel/${video.channel.username}`}
+		>
+			<img src={video.channel.image} alt="channel pfp" class="icon" />
+		</a>
+		<div>
+			<p class="w-${mw} font-semibold">{video.title}</p>
+			<a href={`channel/${video.channel.username}`}>{video.channel.username}</a>
+			<p>{video.views} - {video.uploaded}</p>
+		</div>
+	</div>
 </a>
 
-<style></style>
+<style>
+	.icon {
+		height: 2em;
+		width: 2em;
+	}
+</style>

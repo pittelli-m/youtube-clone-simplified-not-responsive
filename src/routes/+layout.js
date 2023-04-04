@@ -14,12 +14,13 @@ const app = initializeApp(firebaseConfig);
 export const load = async () => {
 	const allVideos = await (await import('../lib/videos.json')).default;
 	const users = await (await fetch('https://dummyjson.com/users?limit=5')).json();
-	// TODO Fetch users and assign to channels before return
+
 	const channels = users.users.map((el) => {
 		return {
 			id: el.id,
 			username: el.username,
 			image: el.image,
+			subscribers: Math.round(Math.random() * 999999),
 			videos: allVideos.slice(el.id * 3 - 1, el.id * 3 - 1 + 3)
 		};
 	});
