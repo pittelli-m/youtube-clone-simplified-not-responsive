@@ -1,5 +1,8 @@
 export const load = async () => {
-	const allPosts = await (await fetch('https://dummyjson.com/posts')).json();
+	// TODO sveltekit tutorial load function
+
+	const allPosts = await (await fetch('https://dummyjson.com/posts?limit=30&skip=30')).json();
+
 	const getPosts = async () => {
 		const posts = await Promise.all(allPosts.posts.map((el) => getAuthor(el)));
 		return posts;
@@ -16,6 +19,8 @@ export const load = async () => {
 	};
 
 	const posts = await getPosts();
+
+	console.log(posts);
 
 	return { posts };
 };

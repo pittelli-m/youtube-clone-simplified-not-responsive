@@ -4,6 +4,9 @@
 	import Menu from 'svelte-material-icons/Menu.svelte';
 	import Magnify from 'svelte-material-icons/Magnify.svelte';
 	import AccountCircleOutline from 'svelte-material-icons/AccountCircleOutline.svelte';
+	import VideoOutline from 'svelte-material-icons/VideoOutline.svelte';
+	import BellOutline from 'svelte-material-icons/BellOutline.svelte';
+	import WindowClose from 'svelte-material-icons/WindowClose.svelte';
 
 	let isUserExpanded = false;
 	const handleLogInOut = async () => {
@@ -12,11 +15,16 @@
 			$authState.onAuthStateChangedListener(() => {
 				$authState.isLoggedIn = true;
 			});
+			isUserExpanded = false;
 		} else
 			$authState.onAuthStateChangedListener(() => {
 				$authState.signOutUser();
 				$authState.isLoggedIn = false;
 			});
+	};
+
+	const handleToggleUserExp = () => {
+		isUserExpanded = !isUserExpanded;
 	};
 </script>
 
@@ -45,15 +53,23 @@
 				Accedi
 			</button>
 		{:else}
-			<button
-				class="static"
-				on:click={(() => {
-					isUserExpanded = true;
-				})()}>U</button
-			>
+			<div class="flex items-center gap-5">
+				<button><VideoOutline size={'1.5em'} /></button>
+				<button><BellOutline size={'1.5em'} /></button>
+				<button
+					class="ml-16 h-9 w-9 rounded-full bg-blue-600 text-xl text-white"
+					on:click={handleToggleUserExp}>U</button
+				>
+			</div>
+
 			{#if isUserExpanded}
-				<div class="absolute right-0 top-0 h-20 w-24">
-					<button on:click={handleLogInOut}>Esci</button>
+				<div class="absolute right-14 top-3 z-40">
+					<button
+						on:click={handleLogInOut}
+						class=" flex items-center gap-2 rounded-full border border-red-500 px-2 py-1 font-thin text-red-500"
+					>
+						<WindowClose size={'1.2em'} color={'rgb(239 68 68)'} />Esci
+					</button>
 				</div>
 			{/if}
 		{/if}
@@ -63,8 +79,5 @@
 <style>
 	.mainLogo {
 		width: 6rem;
-	}
-	.pointer {
-		cursor: pointer;
 	}
 </style>

@@ -27,8 +27,8 @@ export const load = async () => {
 	const aVideos = [...channels.map((el) => [...el.videos])].flat();
 	const videos = aVideos.map((el) => {
 		let channel = channels.find((channel) => channel.videos.includes(el));
-		return { ...el, channel };
+		let likes = Math.round(el.views * 0.3);
+		return { ...el, channel, likes };
 	});
-	console.log(videos);
 	return { videos, channels };
 };

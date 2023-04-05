@@ -21,7 +21,7 @@
 		<p class={button}>Caricamenti Recenti</p>
 	</div>
 	<div
-		class="videoList grid h-[80vh] grid-cols-[repeat(3,_360px)] justify-between overflow-y-auto pr-60 pt-10"
+		class="videoList grid h-[80vh] grid-cols-[repeat(3,_360px)] gap-12 overflow-y-auto pr-60 pt-10"
 	>
 		{#each videos as video}
 			<VideoCard {video} mw={'w-[360px]'} mh={'h-[180px]'} />

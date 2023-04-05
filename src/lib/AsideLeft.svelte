@@ -1,4 +1,6 @@
 <script>
+	import authState from '../stores/authStore';
+	import appState from '../stores/appState';
 	import HomeVariantOutline from 'svelte-material-icons/HomeVariantOutline.svelte';
 	import YoutubeSubscription from 'svelte-material-icons/YoutubeSubscription.svelte';
 	import MusicBoxMultipleOutline from 'svelte-material-icons/MusicBoxMultipleOutline.svelte';
@@ -69,7 +71,19 @@
 	<div class="px-2">
 		<div class="flex flex-col border-b border-b-gray-300 py-2">
 			<p class="rounded-lg px-3 py-2 hover:bg-gray-200">Iscrizioni</p>
-			<a href="/" class="flex rounded-lg px-3 py-2 hover:bg-gray-200">Canale</a>
+			{#if $authState.isLoggedIn && $appState.iscrizioni.length > 0}
+				{#each $appState.iscrizioni as channel}
+					<a
+						href={`/channel/${channel.username}`}
+						class="flex gap-2 rounded-lg px-3 py-2 hover:bg-gray-200"
+					>
+						<img src={channel.image} alt={channel.username} class="icon" />
+						{channel.username}
+					</a>
+				{/each}
+			{:else}
+				<p class="flex rounded-lg px-3 py-2 hover:bg-gray-200">-</p>
+			{/if}
 		</div>
 	</div>
 	<div class="px-2">

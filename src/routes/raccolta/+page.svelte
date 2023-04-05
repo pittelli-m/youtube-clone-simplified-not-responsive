@@ -22,9 +22,11 @@
 		</p>
 		<div class="ml-4">
 			{#if $appState.piaciuti}
-				{#each $appState.piaciuti as liked}
-					<VideoCard video={liked} />
-				{/each}
+				<div class="grid grid-cols-[repeat(3,_360px)] gap-12 overflow-y-auto pr-60 pt-10">
+					{#each $appState.piaciuti as liked}
+						<VideoCard video={liked} mw={'w-[360px]'} mh={'h-[180px]'} />
+					{/each}
+				</div>
 			{/if}
 		</div>
 	{/if}
