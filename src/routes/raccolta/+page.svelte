@@ -3,11 +3,10 @@
 	import ThumbUpOutline from 'svelte-material-icons/ThumbUpOutline.svelte';
 	import appState from '../../stores/appState';
 	import VideoCard from '../../lib/VideoCard.svelte';
-	import authState from '../../stores/authStore';
 </script>
 
-<div class={`${!$authState.isLoggedIn && 'flex h-full w-full items-center justify-start'}`}>
-	{#if !$authState.isLoggedIn}
+<div class={`${!$appState.isLoggedIn && 'flex h-full w-full items-center justify-start'}`}>
+	{#if !$appState.isLoggedIn}
 		<div class="ml-80 flex flex-col items-center">
 			<div>
 				<PlaylistPlay size={'10em'} />

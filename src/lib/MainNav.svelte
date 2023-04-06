@@ -1,5 +1,6 @@
 <script>
 	import authState from '../stores/authStore';
+	import appState, { update } from '../stores/appState';
 	import Logo from '../assets/icons/ytLogo.svg';
 	import Menu from 'svelte-material-icons/Menu.svelte';
 	import Magnify from 'svelte-material-icons/Magnify.svelte';
@@ -14,12 +15,16 @@
 			await $authState.signInWithGooglePopup();
 			$authState.onAuthStateChangedListener(() => {
 				$authState.isLoggedIn = true;
+				$appState.isLoggedIn = true;
+				update({ ...$appState });
 			});
 			isUserExpanded = false;
 		} else
 			$authState.onAuthStateChangedListener(() => {
 				$authState.signOutUser();
 				$authState.isLoggedIn = false;
+				$appState.isLoggedIn = false;
+				update({ ...$appState });
 			});
 	};
 
@@ -44,7 +49,7 @@
 		</div>
 	</div>
 	<div>
-		{#if !$authState.isLoggedIn}
+		{#if !$appState.isLoggedIn}
 			<button
 				on:click={handleLogInOut}
 				class="flex items-center gap-1 rounded-full border border-blue-600 px-2 py-1 text-blue-600"

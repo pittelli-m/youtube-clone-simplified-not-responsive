@@ -21,7 +21,11 @@ export const load = async () => {
 			username: el.username,
 			image: el.image,
 			subscribers: Math.round(Math.random() * 999999),
-			videos: allVideos.slice(el.id * 3 - 1, el.id * 3 - 1 + 3)
+			videos: allVideos.slice(el.id * 3 - 1, el.id * 3 - 1 + 3),
+			birthDate: el.birthDate,
+			university: el.university,
+			city: el.address.city,
+			name: `${el.firstName} ${el.lastName}`
 		};
 	});
 	const aVideos = [...channels.map((el) => [...el.videos])].flat();

@@ -71,10 +71,10 @@
 	<div class="px-2">
 		<div class="flex flex-col border-b border-b-gray-300 py-2">
 			<p class="rounded-lg px-3 py-2 hover:bg-gray-200">Iscrizioni</p>
-			{#if $authState.isLoggedIn && $appState.iscrizioni.length > 0}
+			{#if $appState.isLoggedIn && $appState.iscrizioni.length > 0}
 				{#each $appState.iscrizioni as channel}
 					<a
-						href={`/channel/${channel.username}`}
+						href={`/channel/${channel.id}`}
 						class="flex gap-2 rounded-lg px-3 py-2 hover:bg-gray-200"
 					>
 						<img src={channel.image} alt={channel.username} class="icon" />

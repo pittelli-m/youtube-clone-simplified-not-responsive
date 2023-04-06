@@ -16,12 +16,12 @@
 	<div class="mb-5 flex flex-col items-center gap-4">
 		<a
 			class="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full border border-gray-200"
-			href={`/channel/${channel.username}`}
+			href={`/channel/${channel.id}`}
 		>
 			<img src={channel.image} alt={channel.username} class="h-20 w-20" />
 		</a>
 		<div class="flex flex-col gap-1">
-			<a class="text-xl font-semibold" href={`/channel/${channel.username}`}>{channel.username}</a>
+			<a class="text-xl font-semibold" href={`/channel/${channel.id}`}>{channel.username}</a>
 			<p class="text-sm text-gray-600">
 				{`@${channel.username} `}
 			</p>

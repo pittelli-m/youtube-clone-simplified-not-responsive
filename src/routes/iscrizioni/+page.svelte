@@ -1,12 +1,11 @@
 <script>
-	import authState from '../../stores/authStore';
 	import appState from '../../stores/appState';
 	import YoutubeSubscription from 'svelte-material-icons/YoutubeSubscription.svelte';
 	import ChannelCard from '../../lib/ChannelCard.svelte';
 </script>
 
 <div class="p-5">
-	{#if !$authState.isLoggedIn}
+	{#if !$appState.isLoggedIn}
 		<div class="ml-[-400px] mt-36 flex flex-col items-center">
 			<div>
 				<YoutubeSubscription size={'10em'} />

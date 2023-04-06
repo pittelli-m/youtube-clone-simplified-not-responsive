@@ -8,10 +8,12 @@ export const load = async () => {
 	const getAuthor = async (el) => {
 		let user = await (await fetch(`https://dummyjson.com/users/${el.id}`)).json();
 		const author = user.username;
+		const avatar = user.image;
 		return {
 			post: el.body,
 			authorID: el.userId,
-			author
+			author,
+			avatar
 		};
 	};
 

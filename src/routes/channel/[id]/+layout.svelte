@@ -2,15 +2,17 @@
 	import { page } from '$app/stores';
 	export let data;
 	import appState from '../../../stores/appState.js';
-	import authState from '../../../stores/authStore.js';
 	import { update } from '../../../stores/appState.js';
 
-	let selectedTab = 'home';
+	let selectedTab;
+
+	if (window.location.pathname.includes('community')) selectedTab = 'community';
+	if (window.location.pathname.includes('info')) selectedTab = 'info';
 
 	const { channels } = data;
 
-	$: channel = channels.find((el) => el.username === $page.params.id);
-	$: loggedOut = !$authState.isLoggedIn;
+	$: channel = channels.find((el) => parseInt(el.id) === parseInt($page.params.id));
+	$: loggedOut = !$appState.isLoggedIn;
 
 	const handleSubscribe = (id) => {
 		if ($appState.iscrizioni.find((el) => el.id === id)) return;
@@ -67,17 +69,19 @@
 	<div>
 		<div class="flex h-12 border-b border-gray-200">
 			<a
-				href={`/channel/${channel.username}`}
-				class={`w-48 pt-2 text-center text-gray-600 ${selectedTab === 'home' && '--selected'}`}
+				href={`/channel/${channel.id}`}
+				class={`w-48 pt-2 text-center text-gray-600 ${
+					selectedTab === 'home' || (!selectedTab && '--selected')
+				}`}
 				on:click={() => handleTabSelect('home')}>HOME</a
 			>
 			<a
-				href={`/channel/${channel.username}/community`}
+				href={`/channel/${channel.id}/community`}
 				class={`w-48 pt-2 text-center text-gray-600 ${selectedTab === 'community' && '--selected'}`}
 				on:click={() => handleTabSelect('community')}>COMMUNITY</a
 			>
 			<a
-				href={`/channel/${channel.username}/info`}
+				href={`/channel/${channel.id}/info`}
 				class={`w-48 pt-2 text-center text-gray-600 ${selectedTab === 'info' && '--selected'}`}
 				on:click={() => handleTabSelect('info')}>INFORMATION</a
 			>

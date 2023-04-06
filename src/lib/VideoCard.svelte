@@ -2,9 +2,18 @@
 	export let video;
 	export let mw;
 	export let mh;
+	let liked = false;
+	import appState from '../stores/appState';
+
+	$: loggedOut = !$appState.isLoggedIn;
+
+	if ($appState.piaciuti.find((el) => el.id === video.id) && !loggedOut) liked = true;
 </script>
 
-<a class={`relative flex flex-col items-start`} href={`/video/${video.id}`}>
+<a
+	class={`relative flex flex-col items-start`}
+	href={`/video/${liked && !loggedOut ? `${video.id}/list/piaciuti` : video.id}`}
+>
 	<img
 		src={video.thumb}
 		alt={video.title}
@@ -14,13 +23,13 @@
 		<div class="mt-3 flex gap-4">
 			<a
 				class="flex h-12 w-12 items-center justify-center rounded-full"
-				href={`channel/${video.channel.username}`}
+				href={`channel/${video.channel.id}`}
 			>
 				<img src={video.channel.image} alt="channel pfp" class="icon" />
 			</a>
 			<div>
 				<p class="w-${mw} font-semibold">{video.title}</p>
-				<a href={`channel/${video.channel.username}`}>{video.channel.username}</a>
+				<a href={`channel/${video.channel.id}`}>{video.channel.username}</a>
 				<p>{video.views} - {video.uploaded}</p>
 			</div>
 		</div>

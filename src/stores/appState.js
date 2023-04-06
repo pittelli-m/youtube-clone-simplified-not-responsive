@@ -3,7 +3,8 @@ import { writable } from 'svelte/store';
 const initialState = {
 	iscrizioni: [],
 	piaciuti: [],
-	commenti: []
+	commenti: [],
+	isLoggedIn: false
 };
 
 const isBrowser = typeof window !== 'undefined';

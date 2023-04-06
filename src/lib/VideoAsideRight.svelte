@@ -1,7 +1,7 @@
 <script>
-	export let video;
 	export let videos;
-	const filteredVideos = videos.filter((el) => el.id !== video.id);
+	export let video;
+	const filteredVideos = videos.filter((el) => el.id !== video);
 </script>
 
 <div
@@ -21,8 +21,7 @@
 				<div class="flex gap-1">
 					<div>
 						<p class="text-xs font-semibold">{preview.title.toUpperCase()}</p>
-						<a href={`/channel/${preview.channel.username}`} class="text-xs"
-							>{preview.channel.username}</a
+						<a href={`/channel/${preview.channel.id}`} class="text-xs">{preview.channel.username}</a
 						>
 						<p class="text-xs">{preview.views} - {preview.uploaded}</p>
 					</div>

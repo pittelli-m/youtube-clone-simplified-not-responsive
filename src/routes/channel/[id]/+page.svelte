@@ -4,7 +4,7 @@
 	export let data;
 	const { channels } = data;
 
-	let channel = channels.find((el) => el.username === $page.params.id);
+	let channel = channels.find((el) => parseInt(el.id) === parseInt($page.params.id));
 
 	const videos = channel.videos;
 </script>
