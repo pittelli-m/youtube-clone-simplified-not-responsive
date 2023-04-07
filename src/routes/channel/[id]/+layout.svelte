@@ -3,11 +3,41 @@
 	export let data;
 	import appState from '../../../stores/appState.js';
 	import { update } from '../../../stores/appState.js';
+	import { browser } from '$app/environment';
 
 	let selectedTab;
 
-	if (window.location.pathname.includes('community')) selectedTab = 'community';
-	if (window.location.pathname.includes('info')) selectedTab = 'info';
+	if (browser) {
+		const checkTab = () => {
+			if (window.location.pathname.includes('community')) selectedTab = 'community';
+			else if (window.location.pathname.includes('info')) selectedTab = 'info';
+			else selectedTab = 'home';
+		};
+
+		checkTab();
+
+		history.pushState = ((f) =>
+			function pushState() {
+				let ret = f.apply(this, arguments);
+				window.dispatchEvent(new Event('pushstate'));
+				window.dispatchEvent(new Event('locationchange'));
+				return ret;
+			})(history.pushState);
+
+		history.replaceState = ((f) =>
+			function replaceState() {
+				let ret = f.apply(this, arguments);
+				window.dispatchEvent(new Event('replacestate'));
+				window.dispatchEvent(new Event('locationchange'));
+				return ret;
+			})(history.replaceState);
+
+		window.addEventListener('popstate', () => {
+			window.dispatchEvent(new Event('locationchange'));
+		});
+
+		window.addEventListener('locationchange', checkTab);
+	}
 
 	const { channels } = data;
 
@@ -71,7 +101,7 @@
 			<a
 				href={`/channel/${channel.id}`}
 				class={`w-48 pt-2 text-center text-gray-600 ${
-					selectedTab === 'home' || (!selectedTab && '--selected')
+					(selectedTab === 'home' || !selectedTab) && '--selected'
 				}`}
 				on:click={() => handleTabSelect('home')}>HOME</a
 			>

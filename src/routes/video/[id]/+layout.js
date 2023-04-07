@@ -1,5 +1,5 @@
-export const load = async () => {
-	const allPosts = await (await fetch('https://dummyjson.com/posts')).json();
+export const load = async ({ fetch }) => {
+	const allPosts = await (await fetch('https://dummyjson.com/posts?limit=10')).json();
 	const getPosts = async () => {
 		const posts = await Promise.all(allPosts.posts.map((el) => getAuthor(el)));
 		return posts;

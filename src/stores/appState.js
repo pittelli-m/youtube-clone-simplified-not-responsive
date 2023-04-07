@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
 const initialState = {
 	iscrizioni: [],
@@ -7,12 +8,10 @@ const initialState = {
 	isLoggedIn: false
 };
 
-const isBrowser = typeof window !== 'undefined';
-
-const localState = isBrowser && localStorage.getItem('state');
+const localState = browser && localStorage.getItem('state');
 
 if (!localState) {
-	isBrowser && localStorage.setItem('state', JSON.stringify(initialState));
+	browser && localStorage.setItem('state', JSON.stringify(initialState));
 }
 
 const state = localState ? await JSON.parse(localState) : initialState;

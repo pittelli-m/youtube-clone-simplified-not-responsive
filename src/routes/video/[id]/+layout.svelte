@@ -12,9 +12,6 @@
 	import { onMount } from 'svelte';
 
 	export let data;
-	let y;
-	let h;
-	let z;
 
 	const { posts } = data;
 
@@ -124,7 +121,7 @@
 	};
 </script>
 
-<div class="ml-2 w-[900px]">
+<div class="anchor ml-2 w-[900px]">
 	{#key target}
 		<Player video={target} />
 	{/key}
@@ -187,7 +184,7 @@
 
 	<div class="mt-5 flex flex-col gap-3">
 		<div>
-			<p>{`${posts.length} commenti`}</p>
+			<p>{`${comments.length} commenti`}</p>
 		</div>
 		<form class="mb-4 flex flex-col items-start gap-3" on:submit={(e) => handleSubmit(e)}>
 			{#if !loggedOut}
@@ -216,14 +213,18 @@
 		</form>
 		{#key comments}
 			<div class="flex flex-col gap-4">
-				<!-- TODO Intersectional Observer - fetch more comments -->
 				{#each comments as post}
 					<CommentCard {post} />
 				{/each}
 			</div>
 		{/key}
-
 		<div class="h-12 w-full" id="bottomLoader" bind:this={targetDiv}>Loading more...</div>
 	</div>
 </div>
 <slot />
+
+<style>
+	.anchor {
+		overflow-anchor: none;
+	}
+</style>

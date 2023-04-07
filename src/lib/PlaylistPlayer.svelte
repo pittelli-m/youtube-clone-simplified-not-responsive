@@ -1,10 +1,17 @@
 <script>
 	import appState from '../stores/appState';
 	import PlaylistItem from './PlaylistItem.svelte';
+	import SkipNext from 'svelte-material-icons/SkipNext.svelte';
+	import SkipPrevious from 'svelte-material-icons/SkipPrevious.svelte';
+	import { goto } from '$app/navigation';
+
 	export let playing;
+
 	$: videos = $appState.piaciuti;
 
 	let items = [...$appState.piaciuti];
+
+	$: playIndex = items.findIndex((el) => el.id === playing);
 
 	let dragIndex = null;
 	let dropIndex = null;
@@ -30,15 +37,45 @@
 		dragIndex = null;
 		dropIndex = null;
 	};
+
+	const navigateNext = () => {
+		let video = items[playIndex + 1];
+		const slug = video.id;
+		goto(`/video/${slug}/list/piaciuti`);
+	};
+
+	const navigatePrev = () => {
+		let video = items[playIndex - 1];
+		const slug = video.id;
+		goto(`/video/${slug}/list/piaciuti`);
+	};
 </script>
 
 <div
-	class="aside--right absolute left-[920px] top-0 flex h-full w-[360px] flex-col gap-2 overflow-auto rounded-xl border border-gray-200 "
+	class="aside--right absolute left-[920px] top-0 flex h-full w-[360px] flex-col gap-2 overflow-auto rounded-xl border border-gray-200"
 >
 	<div class="flex gap-8 p-2">
 		<p class="text-xl font-semibold">Video Piaciuti</p>
 		<p>User - {items.length}</p>
 	</div>
+	{#key playIndex}
+		<div class="flex items-center gap-5 p-2">
+			<button
+				disabled={playIndex === 0}
+				class="disabled:cursor-not-allowed"
+				on:click={navigatePrev}
+			>
+				<SkipPrevious size={'1.5em'} />
+			</button>
+			<button
+				disabled={playIndex === items.length - 1}
+				class="disabled:cursor-not-allowed"
+				on:click={navigateNext}
+			>
+				<SkipNext size={'1.5em'} />
+			</button>
+		</div>
+	{/key}
 	<ul class="list-none">
 		{#each items as video, i}
 			<PlaylistItem

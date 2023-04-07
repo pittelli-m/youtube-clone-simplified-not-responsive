@@ -11,7 +11,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const load = async () => {
+export const load = async ({ fetch }) => {
 	const allVideos = await (await import('../lib/videos.json')).default;
 	const users = await (await fetch('https://dummyjson.com/users?limit=5')).json();
 
