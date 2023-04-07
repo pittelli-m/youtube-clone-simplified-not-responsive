@@ -93,7 +93,9 @@
 </script>
 
 <div class="ml-2 w-[900px]">
-	<Player video={target} />
+	{#key target}
+		<Player video={target} />
+	{/key}
 	<h4 class="my-2 text-xl font-semibold">{target.title}</h4>
 	<div class="flex items-center justify-between">
 		<div class="flex items-center gap-5">
@@ -182,6 +184,7 @@
 		</form>
 		{#key comments}
 			<div class="flex flex-col gap-4">
+				<!-- TODO Intersectional Observer - fetch more comments -->
 				{#each comments as post}
 					<CommentCard {post} />
 				{/each}

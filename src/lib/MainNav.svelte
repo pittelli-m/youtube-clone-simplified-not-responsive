@@ -10,22 +10,25 @@
 	import WindowClose from 'svelte-material-icons/WindowClose.svelte';
 
 	let isUserExpanded = false;
-	const handleLogInOut = async () => {
-		if (!$authState.isLoggedIn) {
-			await $authState.signInWithGooglePopup();
-			$authState.onAuthStateChangedListener(() => {
-				$authState.isLoggedIn = true;
-				$appState.isLoggedIn = true;
-				update({ ...$appState });
-			});
-			isUserExpanded = false;
-		} else
-			$authState.onAuthStateChangedListener(() => {
-				$authState.signOutUser();
-				$authState.isLoggedIn = false;
-				$appState.isLoggedIn = false;
-				update({ ...$appState });
-			});
+
+	const handleLogIn = async () => {
+		await $authState.signInWithGooglePopup();
+		$authState.onAuthStateChangedListener(() => {
+			$authState.isLoggedIn = true;
+			$appState.isLoggedIn = true;
+			update({ ...$appState });
+		});
+		isUserExpanded = false;
+	};
+
+	const handleLogOut = () => {
+		$authState.onAuthStateChangedListener(() => {
+			$authState.signOutUser();
+			$authState.isLoggedIn = false;
+			$appState.isLoggedIn = false;
+			update({ ...$appState });
+		});
+		isUserExpanded = false;
 	};
 
 	const handleToggleUserExp = () => {
@@ -51,7 +54,7 @@
 	<div>
 		{#if !$appState.isLoggedIn}
 			<button
-				on:click={handleLogInOut}
+				on:click={handleLogIn}
 				class="flex items-center gap-1 rounded-full border border-blue-600 px-2 py-1 text-blue-600"
 			>
 				<AccountCircleOutline size={'1.5em'} color={'rgb(37 99 235)'} />
@@ -70,7 +73,7 @@
 			{#if isUserExpanded}
 				<div class="absolute right-14 top-3 z-40">
 					<button
-						on:click={handleLogInOut}
+						on:click={handleLogOut}
 						class=" flex items-center gap-2 rounded-full border border-red-500 px-2 py-1 font-thin text-red-500"
 					>
 						<WindowClose size={'1.2em'} color={'rgb(239 68 68)'} />Esci
