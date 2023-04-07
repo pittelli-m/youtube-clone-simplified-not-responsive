@@ -49,9 +49,7 @@
 
 		observer.observe(targetDiv);
 
-		return () => {
-			observer.disconnect();
-		};
+		return () => observer.disconnect();
 	});
 
 	const handleSubscribe = (id) => {

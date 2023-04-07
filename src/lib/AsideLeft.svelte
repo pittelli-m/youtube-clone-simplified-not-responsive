@@ -31,7 +31,7 @@
 			<p class="flex cursor-pointer gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
 				<img src={Shorts} alt="YouTube Shorts Logo" class="icon" /> Shorts
 			</p>
-			<a href="/iscrizioni" class="flex gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
+			<a href="/subscriptions" class="flex gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
 				<YoutubeSubscription size={'1.5em'} />Iscrizioni</a
 			>
 			<p class="flex cursor-pointer gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
@@ -45,7 +45,7 @@
 	</div>
 	<div class="px-2">
 		<div class="flex flex-col border-b border-b-gray-300 py-2">
-			<a href="/raccolta" class="flex gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
+			<a href="/library" class="flex gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">
 				<MusicBoxMultipleOutline size={'1.5em'} />Raccolta</a
 			>
 			<p class="flex cursor-pointer gap-4 rounded-lg px-3 py-2 hover:bg-gray-200">

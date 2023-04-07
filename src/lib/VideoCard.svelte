@@ -10,7 +10,7 @@
 
 <a
 	class={`relative flex flex-col items-start`}
-	href={`/video/${piaciuti ? `${video.id}/list/piaciuti` : video.id}`}
+	href={`/video/${piaciuti ? `${video.id}/list/liked` : video.id}`}
 >
 	<img
 		src={video.thumb}

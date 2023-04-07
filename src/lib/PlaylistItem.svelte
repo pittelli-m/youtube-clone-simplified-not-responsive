@@ -16,7 +16,7 @@
 	on:dragover={dragover}
 >
 	<p>{index + 1}</p>
-	<a class="flex items-center gap-2" href={`/video/${video.id}/list/piaciuti`}>
+	<a class="flex items-center gap-2" href={`/video/${video.id}/list/liked`}>
 		<div class="flex min-w-[150px] items-start">
 			<img src={video.thumb} alt={video.title} class=" h-[80px] w-[150px] rounded-xl" />
 		</div>

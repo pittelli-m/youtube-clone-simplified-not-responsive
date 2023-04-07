@@ -12,7 +12,7 @@ const googleProvider = new GoogleAuthProvider();
 const auth = getAuth();
 const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 
-const signOutUser = async () => await signOut(auth);
+const signOutUser = () => signOut(auth);
 
 const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 

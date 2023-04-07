@@ -41,13 +41,13 @@
 	const navigateNext = () => {
 		let video = items[playIndex + 1];
 		const slug = video.id;
-		goto(`/video/${slug}/list/piaciuti`);
+		goto(`/video/${slug}/list/liked`);
 	};
 
 	const navigatePrev = () => {
 		let video = items[playIndex - 1];
 		const slug = video.id;
-		goto(`/video/${slug}/list/piaciuti`);
+		goto(`/video/${slug}/list/liked`);
 	};
 </script>
 
