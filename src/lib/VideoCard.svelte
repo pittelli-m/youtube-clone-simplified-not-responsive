@@ -2,17 +2,15 @@
 	export let video;
 	export let mw;
 	export let mh;
-	let liked = false;
+	export let piaciuti = false;
 	import appState from '../stores/appState';
 
 	$: loggedOut = !$appState.isLoggedIn;
-
-	if ($appState.piaciuti.find((el) => el.id === video.id) && !loggedOut) liked = true;
 </script>
 
 <a
 	class={`relative flex flex-col items-start`}
-	href={`/video/${liked && !loggedOut ? `${video.id}/list/piaciuti` : video.id}`}
+	href={`/video/${piaciuti ? `${video.id}/list/piaciuti` : video.id}`}
 >
 	<img
 		src={video.thumb}

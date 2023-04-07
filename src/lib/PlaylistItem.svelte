@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class={`mb-3 flex items-center gap-1 ${video.id === playing && 'bg-gray-300'}`}
+	class={`mb-3 flex items-center gap-1 p-2 ${video.id === playing && 'bg-gray-300'}`}
 	{draggable}
 	on:dragstart={dragstart}
 	on:drop={drop}

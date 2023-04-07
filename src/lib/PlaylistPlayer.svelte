@@ -33,9 +33,9 @@
 </script>
 
 <div
-	class="aside--right absolute left-[920px] top-0 flex h-full w-[360px] flex-col gap-2 overflow-auto rounded-xl border border-gray-200 p-2"
+	class="aside--right absolute left-[920px] top-0 flex h-full w-[360px] flex-col gap-2 overflow-auto rounded-xl border border-gray-200 "
 >
-	<div class="flex gap-8">
+	<div class="flex gap-8 p-2">
 		<p class="text-xl font-semibold">Video Piaciuti</p>
 		<p>User - {items.length}</p>
 	</div>
