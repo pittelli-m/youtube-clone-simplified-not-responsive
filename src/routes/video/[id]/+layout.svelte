@@ -9,8 +9,12 @@
 	import DownloadOutline from 'svelte-material-icons/DownloadOutline.svelte';
 	import DotsHorizontal from 'svelte-material-icons/DotsHorizontal.svelte';
 	import CommentCard from '../../../lib/CommentCard.svelte';
+	import { onMount } from 'svelte';
 
 	export let data;
+	let y;
+	let h;
+	let z;
 
 	const { posts } = data;
 
@@ -24,6 +28,34 @@
 
 	$: videos = data.videos;
 	$: target = videos.find((el) => el.id === $page.params.id);
+
+	let targetDiv;
+
+	// let observer = new IntersectionObserver(callback, options);
+
+	onMount(() => {
+		const options = {
+			root: null,
+			rootMargin: '0px',
+			threshold: 0.5
+		};
+
+		const observer = new IntersectionObserver((entries, observer) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					setTimeout(() => {
+						loadMorePosts();
+					}, 500);
+				}
+			});
+		}, options);
+
+		observer.observe(targetDiv);
+
+		return () => {
+			observer.disconnect();
+		};
+	});
 
 	const handleSubscribe = (id) => {
 		if ($appState.iscrizioni.find((el) => el.id === id)) return;
@@ -191,9 +223,7 @@
 			</div>
 		{/key}
 
-		<button class="m-auto rounded-full bg-gray-200 px-3 py-1" on:click={loadMorePosts}>
-			Show more
-		</button>
+		<div class="h-12 w-full" id="bottomLoader" bind:this={targetDiv}>Loading more...</div>
 	</div>
 </div>
 <slot />

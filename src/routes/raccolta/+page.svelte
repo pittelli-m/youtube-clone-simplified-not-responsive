@@ -23,7 +23,7 @@
 			{#if $appState.piaciuti}
 				<div class="grid grid-cols-[repeat(3,_360px)] gap-12 overflow-y-auto pr-60 pt-10">
 					{#each $appState.piaciuti as liked}
-						<VideoCard video={liked} mw={'w-[360px]'} mh={'h-[180px]'} />
+						<VideoCard video={liked} mw={'w-[360px]'} mh={'h-[180px]'} piaciuti={true} />
 					{/each}
 				</div>
 			{/if}
